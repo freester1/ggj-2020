@@ -6,30 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <%= csrf_meta_tag %>
 
-    <title>Hello Draw!</title>
+    <title>Draw Something</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </head>
 
-  <body>
+  <body data-page="<%= page_name(@view_module, @view_template) %>">
     <div class="container">
       <header class="header">
+        <div class="pull-left" style="padding-top: 8px">
+          <p><big>Draw Something</big></p>
+        </div>
         <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
+          <ul class="nav nav-pills pull-left">
+            <li><a href="/new">New Game</a></li>
+            <li><a href="/about">About</a></li>
           </ul>
         </nav>
-        <span class="logo"></span>
+        <div class="clearfix"></div>
       </header>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <%= if get_flash(@conn, :info) do %>
+        <p class="alert alert-info" <role></role>lert"><%= get_flash(@conn, :info) %></p>
+      <% end %>
+      <%= if get_flash(@conn, :error) do %>
+        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <% end %>
 
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
 
     </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

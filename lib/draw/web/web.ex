@@ -39,6 +39,7 @@ defmodule Draw.Web do
       import Draw.Web.Router.Helpers
       import Draw.Web.ErrorHelpers
       import Draw.Web.Gettext
+      import Draw.Web.Helpers
     end
   end
 

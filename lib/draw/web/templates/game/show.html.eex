@@ -1,0 +1,14 @@
+<p>Hello World</p>
+
+<p><button id="clear-btn" class="btn btn-default">Clear Drawing</button>
+   | Points: <span id="point-count">0</span>
+</p>
+
+<div>
+  <canvas id="draw-canvas" width="800" height="600">
+  </canvas>
+</div>
+
+<script>
+ $(draw_init);
+</script>
