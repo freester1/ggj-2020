@@ -1,10 +1,11 @@
 
 import "yuki-createjs";
-import "./socket";
+import socket from "./socket";
 
+var chan;
 var stage;
-var points = [];
-var last_point = null;
+var segs = [];
+var last_down = null;
 
 function draw_init() {
     if ($('body').data('page') != "GameView/show") {
@@ -14,16 +15,38 @@ function draw_init() {
     $('#clear-btn').on("click", clear_stage);
 
     stage = new createjs.Stage("draw-canvas");
+    refresh_stage();
     stage.on("mousedown", got_down);
     stage.on("pressmove", _.throttle(got_drag, 50));
 
-    clear_stage();
+    join_channel("game0");
 }
 
 $(draw_init);
 
+function join_channel(game_id) {
+    chan = socket.channel("game:" + game_id, {});
+    chan.join()
+        .receive("ok", resp => { console.log("Joined successfully", resp); })
+        .receive("error", resp => { console.log("Unable to join", resp); });
+
+    chan.on("draw", remote_draw);
+}
+
+function remote_draw(msg) {
+    draw_seg(msg.seg);
+}
+
+function send_seg(seg) {
+    chan.push("draw", {seg: seg});
+}
+
 function clear_stage() {
-    points = [];
+    segs = [];
+    refresh_stage();
+}
+
+function refresh_stage() {
     stage.removeAllChildren();
 
     var bg = new createjs.Shape();
@@ -33,28 +56,35 @@ function clear_stage() {
     stage.addChild(bg);
 
     stage.update();
-    $('#point-count').text(points.length);
+    $('#point-count').text(segs.length);
+}
+
+function draw_seg(seg) {
+    var [[x0, y0], [x1, y1]] = seg;
+    var sh = new createjs.Shape();
+    sh.graphics.
+       beginStroke("Black").
+       setStrokeStyle(5, "round").
+       moveTo(x0, y0).
+       lineTo(x1, y1);
+    stage.addChild(sh);
+    stage.update();
 }
 
 function got_down(evt) {
-    last_point = [evt.stageX, evt.stageY];
+    last_down = [evt.stageX, evt.stageY];
 }
 
 function got_drag(evt) {
-    var [px, py] = last_point;
-    var [cx, cy] = [evt.stageX, evt.stageY];
-    var seg = new createjs.Shape();
-    seg.graphics.
-        beginStroke("Black").
-        setStrokeStyle(5, "round").
-        moveTo(px, py).
-        lineTo(cx, cy);
-    stage.addChild(seg);
-    stage.update();
+    var next_down = [evt.stageX, evt.stageY];
+    var seg = [last_down, next_down];
 
-    points.push([[px, py], [cx, cy]]);
-    last_point = [cx, cy];
+    segs.push(seg);
+    last_down = next_down;
 
-    $('#point-count').text(points.length);
+    draw_seg(seg);
+    send_seg(seg);
+
+    $('#point-count').text(segs.length);
 }
 
