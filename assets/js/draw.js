@@ -12,7 +12,7 @@ function draw_init() {
         return;
     }
 
-    $('#clear-btn').on("click", clear_stage);
+    $('#clear-btn').on("click", got_clear);
 
     stage = new createjs.Stage("draw-canvas");
     refresh_stage();
@@ -24,6 +24,26 @@ function draw_init() {
 
 $(draw_init);
 
+function got_clear(evt) {
+    clear_stage();
+    chan.push("clear", {});
+}
+
+function got_down(evt) {
+    last_down = [evt.stageX, evt.stageY];
+}
+
+function got_drag(evt) {
+    var next_down = [evt.stageX, evt.stageY];
+    var seg = [last_down, next_down];
+
+    segs.push(seg);
+    last_down = next_down;
+
+    draw_seg(seg);
+    chan.push("draw", {seg: seg});
+}
+
 function join_channel(game_id) {
     chan = socket.channel("game:" + game_id, {});
     chan.join()
@@ -31,14 +51,11 @@ function join_channel(game_id) {
         .receive("error", resp => { console.log("Unable to join", resp); });
 
     chan.on("draw", remote_draw);
+    chan.on("clear", clear_stage);
 }
 
 function remote_draw(msg) {
     draw_seg(msg.seg);
-}
-
-function send_seg(seg) {
-    chan.push("draw", {seg: seg});
 }
 
 function clear_stage() {
@@ -54,8 +71,8 @@ function refresh_stage() {
     bg.x = 0;
     bg.y = 0;
     stage.addChild(bg);
-
     stage.update();
+
     $('#point-count').text(segs.length);
 }
 
@@ -69,21 +86,6 @@ function draw_seg(seg) {
        lineTo(x1, y1);
     stage.addChild(sh);
     stage.update();
-}
-
-function got_down(evt) {
-    last_down = [evt.stageX, evt.stageY];
-}
-
-function got_drag(evt) {
-    var next_down = [evt.stageX, evt.stageY];
-    var seg = [last_down, next_down];
-
-    segs.push(seg);
-    last_down = next_down;
-
-    draw_seg(seg);
-    send_seg(seg);
 
     $('#point-count').text(segs.length);
 }

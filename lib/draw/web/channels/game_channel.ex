@@ -12,8 +12,12 @@ defmodule Draw.Web.GameChannel do
   # Channels can be used in a request/response fashion
   # by sending replies to requests from the client
   def handle_in("draw", payload, socket) do
-    IO.inspect {"draw", payload}
     broadcast socket, "draw", payload
+    {:reply, {:ok, payload}, socket}
+  end
+
+  def handle_in("clear", payload, socket) do
+    broadcast socket, "clear", payload
     {:reply, {:ok, payload}, socket}
   end
 
