@@ -1,7 +1,8 @@
 <p>Hello World</p>
 
 <p><button id="clear-btn" class="btn btn-default">Clear Drawing</button>
-   | Points: <span id="point-count">0</span>
+  | Points: <span id="point-count">0</span>
+  | Signed in as: <%= @user %>
 </p>
 
 <div>
@@ -10,5 +11,5 @@
 </div>
 
 <script>
- $(draw_init);
+window.draw_cfg = { user: "<%= @user %>", game: "<%= @game %>", host: <%= @host %>};
 </script>

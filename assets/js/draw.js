@@ -16,12 +16,18 @@ function draw_init() {
 
     stage = new createjs.Stage("draw-canvas");
     refresh_stage();
-    stage.on("mousedown", got_down);
-    stage.on("pressmove", _.throttle(got_drag, 50));
 
-    join_channel("game0");
+    if (draw_cfg.host) {
+        console.log("you're hosting", draw_cfg);
+        stage.on("mousedown", got_down);
+        stage.on("pressmove", _.throttle(got_drag, 50));
+    }
+    else {
+        console.log("you're guessing", draw_cfg);
+    }
+
+    join_channel(draw_cfg.game);
 }
-
 $(draw_init);
 
 function got_clear(evt) {

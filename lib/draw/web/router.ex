@@ -17,6 +17,8 @@ defmodule Draw.Web.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    post "/games/host", GameController, :host
+    post "/games/join", GameController, :join
     get "/:gtag", GameController, :show
   end
 
