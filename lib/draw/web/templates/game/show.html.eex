@@ -11,5 +11,9 @@
 </div>
 
 <script>
-window.draw_cfg = { user: "<%= @user %>", game: "<%= @game %>", host: <%= @host %>};
+ window.draw_cfg = {
+   user: "<%= escape_javascript @user %>",
+   game: "<%= escape_javascript @game %>",
+   host: <%= @host %>
+ };
 </script>

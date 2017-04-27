@@ -1,6 +1,6 @@
 defmodule Draw.Web.GameController do
   use Draw.Web, :controller
-  alias Draw.Games
+  alias Draw.Game
 
   def show(conn, %{"gtag" => game}) do
     user = get_session(conn, :user)
@@ -15,8 +15,9 @@ defmodule Draw.Web.GameController do
     end
   end
 
-  def host(conn, %{"host" => host}) do
-    Games.create(host["name"], host["word"])
+  def host(conn, %{"game" => gdat}) do
+    game = Game.from_game(gdat)
+    Game.put(host["name"], host["word"])
     conn
     |> put_session(:user, host["name"])
     |> put_session(:host, true)
