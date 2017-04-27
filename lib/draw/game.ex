@@ -1,5 +1,5 @@
 defmodule Draw.Game do
-  defstruct host: "", word: ""
+  defstruct host: nil, word: "pencil", segs: []
 
   def start_link do
     Agent.start_link(fn -> %{} end, name: __MODULE__)
@@ -15,5 +15,18 @@ defmodule Draw.Game do
 
   def from_map(mm) do
     %Game{name: mm["name"], host: mm["host"], word: mm["word"]}
+  end
+
+  def next_word do
+    Enum.random([
+      "dog",
+      "cat",
+      "horse",
+      "frog",
+      "snake",
+      "muffin",
+      "cookie",
+      "pizza",
+    ])
   end
 end
