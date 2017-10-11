@@ -2,12 +2,12 @@ defmodule Draw.Web.GameController do
   use Draw.Web, :controller
   alias Draw.Game
 
-  def show(conn, %{"gtag" => game}) do
+  def show(conn, %{"gtag" => gtag}) do
     user = get_session(conn, :user)
     host = get_session(conn, :host)
 
     if user do
-      render conn, "show.html", user: user, host: host, game: game
+      render conn, "show.html", user: user, host: host, game: gtag
     else
       conn
       |> put_flash(:error, "Please pick a name")
@@ -15,19 +15,17 @@ defmodule Draw.Web.GameController do
     end
   end
 
-  def host(conn, %{"game" => gdat}) do
-    game = Game.from_game(gdat)
-    Game.put(host["name"], host["word"])
+  def host(conn, %{"host_data" => game}) do
     conn
-    |> put_session(:user, host["name"])
+    |> put_session(:user, game["host"])
     |> put_session(:host, true)
-    |> redirect(to: "/" <> host["game"])
+    |> redirect(to: "/" <> game["name"])
   end
 
-  def join(conn, %{"user" => user}) do
+  def join(conn, %{"join_data" => join}) do
     conn
-    |> put_session(:user, user["name"])
+    |> put_session(:user, join["user"])
     |> put_session(:host, false)
-    |> redirect(to: "/" <> user["game"])
+    |> redirect(to: "/g/" <> join["game"])
   end
 end

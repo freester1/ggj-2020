@@ -19,7 +19,7 @@ defmodule Draw.Web.Router do
     get "/", PageController, :index
     post "/games/host", GameController, :host
     post "/games/join", GameController, :join
-    get "/:gtag", GameController, :show
+    get "/g/:gtag", GameController, :show
   end
 
   # Other scopes may use custom stacks.

@@ -6,13 +6,13 @@
   <div class="col-lg-6">
     <h2>Join a Game</h2>
 
-    <%= form_for @conn, "/games/join", [as: :user], fn f -> %>
+    <%= form_for @conn, "/games/join", [as: :join_data], fn f -> %>
     <div class="form-group">
-      <%= label(f, :name, "Name") %>
-      <%= text_input(f, :name, class: "form-control") %>
+      <%= label(f, :user, "Your Name") %>
+      <%= text_input(f, :user, class: "form-control") %>
     </div>
     <div class="form-group">
-      <%= label(f, :game, "Game") %>
+      <%= label(f, :game, "Game Name") %>
       <%= text_input(f, :game, class: "form-control") %>
     </div>
     <%= submit "Join", class: "btn btn-primary" %>
@@ -23,14 +23,14 @@
   <div class="col-lg-6">
     <h2>Host a Game</h2>
 
-    <%= form_for @conn, "/games/host", [as: :host], fn f -> %>
+    <%= form_for @conn, "/games/host", [as: :host_data], fn f -> %>
     <div class="form-group">
-      <%= label(f, :name, "Name") %>
-      <%= text_input(f, :name, class: "form-control") %>
+      <%= label(f, :host, "Your Name") %>
+      <%= text_input(f, :host, class: "form-control") %>
     </div>
     <div class="form-group">
-      <%= label(f, :game, "Game") %>
-      <%= text_input(f, :game, class: "form-control") %>
+      <%= label(f, :name, "Game Name") %>
+      <%= text_input(f, :name, class: "form-control") %>
     </div>
      <div class="form-group">
       <%= label(f, :word, "Word") %>

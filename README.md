@@ -1,5 +1,9 @@
 # Draw
 
+Draw is a multi-player real time "guess the drawing" game.
+
+## Local Development
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
