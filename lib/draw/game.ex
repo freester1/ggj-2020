@@ -11,4 +11,13 @@ defmodule Draw.Game do
   def get(name) do
     Agent.get(__MODULE__, &Map.get(&1, name))
   end
+
+  def next_word do
+    words = ~w(
+      dog cat horse frog snake
+      muffin cookie pizza sandwich
+      house car train clock
+    )
+    Enum.random(words)
+  end
 end
