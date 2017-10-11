@@ -1,5 +1,5 @@
-defmodule Draw.Web.PageControllerTest do
-  use Draw.Web.ConnCase
+defmodule DrawWeb.PageControllerTest do
+  use DrawWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"

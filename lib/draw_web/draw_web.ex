@@ -1,12 +1,12 @@
-defmodule Draw.Web do
+defmodule DrawWeb do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use Draw.Web, :controller
-      use Draw.Web, :view
+      use DrawWeb, :controller
+      use DrawWeb, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -18,17 +18,17 @@ defmodule Draw.Web do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: Draw.Web
+      use Phoenix.Controller, namespace: DrawWeb
       import Plug.Conn
-      import Draw.Web.Router.Helpers
-      import Draw.Web.Gettext
+      import DrawWeb.Router.Helpers
+      import DrawWeb.Gettext
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/draw/web/templates",
-                        namespace: Draw.Web
+      use Phoenix.View, root: "lib/draw_web/templates",
+                        namespace: DrawWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
@@ -36,10 +36,10 @@ defmodule Draw.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import Draw.Web.Router.Helpers
-      import Draw.Web.ErrorHelpers
-      import Draw.Web.Gettext
-      import Draw.Web.Helpers
+      import DrawWeb.Router.Helpers
+      import DrawWeb.ErrorHelpers
+      import DrawWeb.Gettext
+      import DrawWeb.Helpers
     end
   end
 
@@ -54,7 +54,7 @@ defmodule Draw.Web do
   def channel do
     quote do
       use Phoenix.Channel
-      import Draw.Web.Gettext
+      import DrawWeb.Gettext
     end
   end
 

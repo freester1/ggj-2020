@@ -1,5 +1,5 @@
-defmodule Draw.Web.ErrorView do
-  use Draw.Web, :view
+defmodule DrawWeb.ErrorView do
+  use DrawWeb, :view
 
   def render("404.html", _assigns) do
     "Page not found"

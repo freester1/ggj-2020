@@ -6,10 +6,10 @@
 use Mix.Config
 
 # Configures the endpoint
-config :draw, Draw.Web.Endpoint,
+config :draw, DrawWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "SRUg8gNklbHzbHM/MXH2XrBh/DWUv4Ct0gDLS8CZuh8TkMGbBX2zeiVwE23eMDRa",
-  render_errors: [view: Draw.Web.ErrorView, accepts: ~w(html json)],
+  render_errors: [view: DrawWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Draw.PubSub,
            adapter: Phoenix.PubSub.PG2]
 

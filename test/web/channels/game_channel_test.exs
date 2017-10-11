@@ -1,7 +1,7 @@
-defmodule Draw.Web.GameChannelTest do
-  use Draw.Web.ChannelCase
+defmodule DrawWeb.GameChannelTest do
+  use DrawWeb.ChannelCase
 
-  alias Draw.Web.GameChannel
+  alias DrawWeb.GameChannel
 
   setup do
     {:ok, _, socket} =

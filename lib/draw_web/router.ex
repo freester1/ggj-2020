@@ -1,5 +1,5 @@
-defmodule Draw.Web.Router do
-  use Draw.Web, :router
+defmodule DrawWeb.Router do
+  use DrawWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,17 +13,16 @@ defmodule Draw.Web.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Draw.Web do
+  scope "/", DrawWeb do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    post "/games/host", GameController, :host
     post "/games/join", GameController, :join
-    get "/g/:gtag", GameController, :show
+    get "/g/:gname", GameController, :show
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Draw.Web do
+  # scope "/api", DrawWeb do
   #   pipe_through :api
   # end
 end

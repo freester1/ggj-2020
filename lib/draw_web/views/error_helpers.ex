@@ -1,4 +1,4 @@
-defmodule Draw.Web.ErrorHelpers do
+defmodule DrawWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """
@@ -32,9 +32,9 @@ defmodule Draw.Web.ErrorHelpers do
     #     dgettext "errors", "is invalid"
     #
     if count = opts[:count] do
-      Gettext.dngettext(Draw.Web.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(DrawWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(Draw.Web.Gettext, "errors", msg, opts)
+      Gettext.dgettext(DrawWeb.Gettext, "errors", msg, opts)
     end
   end
 end

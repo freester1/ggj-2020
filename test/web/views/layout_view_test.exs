@@ -1,3 +1,3 @@
-defmodule Draw.Web.LayoutViewTest do
-  use Draw.Web.ConnCase, async: true
+defmodule DrawWeb.LayoutViewTest do
+  use DrawWeb.ConnCase, async: true
 end

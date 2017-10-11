@@ -1,7 +1,7 @@
-defmodule Draw.Web.Endpoint do
+defmodule DrawWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :draw
 
-  socket "/socket", Draw.Web.UserSocket
+  socket "/socket", DrawWeb.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -38,7 +38,7 @@ defmodule Draw.Web.Endpoint do
     key: "_draw_key",
     signing_salt: "VloTIBvW"
 
-  plug Draw.Web.Router
+  plug DrawWeb.Router
 
   @doc """
   Dynamically loads configuration from the system environment

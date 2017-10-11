@@ -1,0 +1,48 @@
+
+<div class="row">
+  <div class="col-sm-2">
+      <p>Game: <%= @game %>
+     <br>User: <%= @user %>
+     </p>
+  </div>
+
+  <div class="col-sm-5">
+    <div id="draw-controls">
+      <h2>Draw "<span id="draw-word"><%= @word %></span>"
+        <button id="clear-btn" class="btn btn-default">Clear Drawing</button></h2>
+    </div>
+
+    <div id="guess-controls">
+      <div class="form-inline">
+        <input type="text" id="guess-word" placeholder="type guess here" class="form-control">
+        <button class="btn btn-primary" id="guess-btn">Guess!</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-3">
+    <p id="guess-result">&nbsp;</p>
+  </div>
+
+  <div class="col-sm-2">
+    <p>Segments: <span id="point-count">0</span></p>
+  </div>
+</div>
+
+<div style="text-align: center">
+  <canvas id="draw-canvas" width="800" height="600" style="border: thin dashed black">
+  </canvas>
+</div>
+
+<script>
+ window.draw_cfg = {
+   user: "<%= escape_javascript @user %>",
+   game: "<%= escape_javascript @game %>",
+   host: <%= @host %>,
+   <%= if @host do %>
+   word: "<%= escape_javascript @word %>",
+   <% else %>
+   word: "",
+   <% end %>
+ };
+</script>
