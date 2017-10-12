@@ -36,7 +36,7 @@ end
 environment :prod do
   set include_erts: true
   set include_src: false
-  #set cookie: :"5DYor:bR1Y.j}4$L*`X(eQ!J|sqSet$PZ.HK$5_iAKV0]J>|=0a^t.swOA0q_PeL"
+  set cookie: :"5DYor:bR1Y.j}4$L*`X(eQ!J|sqSet$PZ.HK$5_iAKV0]J>|=0a^t.swOA0q_PeL"
 end
 
 # You may define one or more releases in this file.

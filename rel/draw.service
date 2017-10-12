@@ -1,0 +1,20 @@
+[Unit]
+Description=Draw
+After=network.target
+
+[Service]
+Type=forking
+User=draw
+Group=draw
+WorkingDirectory=/home/draw/draw
+ExecStart=/home/draw/draw/bin/draw start
+ExecStop=/home/draw/draw/bin/draw stop
+Restart=on-failure
+RestartSec=5
+Environment=PORT=8010
+Environment=LANG=en_US.UTF-8
+SyslogIdentifier=draw
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
