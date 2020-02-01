@@ -2,9 +2,26 @@
 
 Draw is a multi-player real time "guess the drawing" game.
 
+
+## Setup
+
+### OSX
+
+```
+// install elixir
+brew update
+brew install elixir
+elixir -v 
+brew upgrade elixir // if version < 1.4
+
+// install Phoenix Framework
+mix local.hex // install Erlang package manager locally
+mix archive.install https://github.com/phoenixframework/archives/raw/master/phx_new.ez
+```
+
 ## Local Development
 
-To start your Phoenix server:
+Starting the local server:
 
   * Install dependencies with `mix deps.get`
   * Install Node.js dependencies with `cd assets && npm install`
